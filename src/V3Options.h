@@ -185,6 +185,9 @@ class V3Options {
     string	m_xAssign;	// main switch: --x-assign
     string	m_xInitial;	// main switch: --x-initial
 
+    string m_covselFile;
+    std::vector<string> m_uncoveredModules;
+
     // Language is now held in FileLine, on a per-node basis. However we still
     // have a concept of the default language at a global level.
     V3LangCode	m_defaultLanguage;	// main switch: --language
@@ -230,6 +233,7 @@ class V3Options {
     bool parseLangExt(const char* swp, const char* langswp, const V3LangCode& lc);
     string filePathCheckOneDir(const string& modname, const string& dirname);
 
+    void readFromCovSelFile();
     // CONSTRUCTORS
     VL_UNCOPYABLE(V3Options);
   public:

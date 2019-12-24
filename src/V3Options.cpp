@@ -409,6 +409,27 @@ V3LangCode V3Options::fileLanguage(const string &filename) {
 }
 
 
+void V3Options::readFromCovSelFile() {
+    // reades module names line by line from the given
+    // filename under --cov-sel switch
+    
+    // TODO : call fileExits() to check if file indeed exists else
+    // throw a warning message
+
+    std::ifstream in(m_covselFile);
+    std::string str;
+    std::cout << "** Excluding coverage for below modules\n";
+    while (std::getline(in, str))
+	{
+	    if(str.size() > 0) {
+		m_uncoveredModules.push_back(str);
+		std::cout << str << std::endl;
+	    }
+	}
+
+    std::cout << "** \n";
+}
+
 //######################################################################
 // Environment
 

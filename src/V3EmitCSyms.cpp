@@ -323,6 +323,7 @@ void EmitCSyms::emitSymHdr() {
 
     if (m_coverBins) {
 	puts("\n// COVERAGE\n");
+        puts("const static uint32_t coverageBins = "); puts(cvtToStr(m_coverBins)); puts(";\n");
 	puts("uint32_t __Vcoverage["); puts(cvtToStr(m_coverBins)); puts("];\n");
     }
 
