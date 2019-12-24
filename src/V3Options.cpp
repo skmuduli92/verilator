@@ -1087,6 +1087,11 @@ void V3Options::parseOptsList(FileLine* fl, const string& optdir, int argc, char
 	    else if ( !strcmp (sw, "-y") && (i+1)<argc ) {
                 shift; addIncDirUser(parseFileArg(optdir,string(argv[i])));
 	    }
+	    else if ( !strcmp (sw, "-cov-sel") && (i+1)<argc) {
+		shift;
+		m_covselFile = argv[i];
+		readFromCovSelFile();
+	    }
 	    else {
                 fl->v3fatal("Invalid Option: "<<argv[i]);
 	    }
