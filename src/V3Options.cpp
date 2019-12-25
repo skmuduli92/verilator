@@ -17,7 +17,7 @@
 // GNU General Public License for more details.
 //
 //*************************************************************************
-
+
 #include "config_build.h"
 #include "verilatedos.h"
 
@@ -41,6 +41,7 @@
 #include <map>
 #include <memory>
 #include <set>
+#include <algorithm>
 
 #include "config_rev.h"
 
@@ -428,6 +429,15 @@ void V3Options::readFromCovSelFile() {
 	}
 
     std::cout << "** \n";
+}
+
+bool V3Options::excludeModuleCov(const string& modName) {
+//    std::vector<string>::const_iterator csi = m_uncoveredModules.begin();
+    std::vector<string>::iterator it = std::find(m_uncoveredModules.begin(),
+						 m_uncoveredModules.end(),
+						 modName);
+
+    return (it != m_uncoveredModules.end());
 }
 
 //######################################################################
