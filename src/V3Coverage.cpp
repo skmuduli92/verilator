@@ -143,7 +143,14 @@ private:
     }
     virtual void visit(AstVar* nodep) {
         iterateChildren(nodep);
-	if (m_modp && !m_inModOff && !m_inToggleOff
+
+	// TODO: check if this is the appropriate place to perform this check
+	bool isExcluded = v3options.opt.excludeModuleCov(m_modp->prettyName());
+	if (isExcluded) {
+	    std::cout << "** excluding toggle coverage collection for module : " << m_modp->prettyName() << std::endl;
+	}
+	
+	if (m_modp && !isExcluded && !m_inModOff && !m_inToggleOff
 	    && nodep->fileline()->coverageOn() && v3Global.opt.coverageToggle()) {
 	    const char* disablep = varIgnoreToggle(nodep);
 	    if (disablep) {
